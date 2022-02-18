@@ -44,6 +44,6 @@ public class AppointmentSolicitedUseCaseTest {
         this.useCase.handle(solicitAppointmentRequest);
 
         verify(this.appointmentCache).save(any());
-        verify(this.appointmentProducer).requestAppointment(any());
+        verify(this.appointmentProducer).solicitAppointment(any());
     }
 }

@@ -26,7 +26,7 @@ public class ClientService {
 
         this.appointmentCache.save(appointment);
 
-        this.appointmentProducer.requestAppointment(appointment);
+        this.appointmentProducer.solicitAppointment(appointment);
     }
 
     public void refuseAppointment(Appointment appointment) {

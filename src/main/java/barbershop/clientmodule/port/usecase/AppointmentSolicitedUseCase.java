@@ -24,7 +24,7 @@ public class AppointmentSolicitedUseCase implements UseCase<AppointmentSolicitRe
 
         this.appointmentCache.save(appointment);
 
-        this.appointmentProducer.requestAppointment(appointment);
+        this.appointmentProducer.solicitAppointment(appointment);
 
         return null;
     }
