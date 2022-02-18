@@ -15,7 +15,7 @@ public class AppointmentSolicitedUseCase implements UseCase<AppointmentSolicitRe
     }
 
     @Override
-    public Void perform(AppointmentSolicitRequest request) {
+    public Void handle(AppointmentSolicitRequest request) {
         var appointment = request.client
                 .schedule(request.task)
                 .with(request.barber)

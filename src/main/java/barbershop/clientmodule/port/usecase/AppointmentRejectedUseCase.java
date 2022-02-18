@@ -12,7 +12,7 @@ public class AppointmentRejectedUseCase implements UseCase<AppointmentRejectedRe
     }
 
     @Override
-    public Void perform(AppointmentRejectedRequest request) {
+    public Void handle(AppointmentRejectedRequest request) {
         this.appointmentCache.delete(request.appointment.id);
 
         return null;

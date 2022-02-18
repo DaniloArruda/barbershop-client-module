@@ -38,7 +38,7 @@ public class AppointmentRejectedUseCaseTest {
 
         var request = new AppointmentRejectedRequest(new Appointment(LocalDateTime.now(), client, barber, task));
 
-        this.useCase.perform(request);
+        this.useCase.handle(request);
 
         verify(appointmentCache).delete(eq(request.appointment.id));
     }

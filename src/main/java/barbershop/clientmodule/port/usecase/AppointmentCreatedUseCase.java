@@ -15,7 +15,7 @@ public class AppointmentCreatedUseCase implements UseCase<AppointmentCreatedRequ
     }
 
     @Override
-    public Void perform(AppointmentCreatedRequest request) {
+    public Void handle(AppointmentCreatedRequest request) {
         this.appointmentCache.save(request.appointment);
         this.mailer.send(request.appointment.client.email.toString(), "Your appointment was confirmed!");
 

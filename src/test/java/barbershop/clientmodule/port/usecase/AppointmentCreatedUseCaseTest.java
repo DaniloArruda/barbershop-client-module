@@ -41,7 +41,7 @@ public class AppointmentCreatedUseCaseTest {
         var task = new Task(UUID.randomUUID(), "Moicano", BigDecimal.TEN, 20);
         var request = new AppointmentCreatedRequest(new Appointment(LocalDateTime.now(), client, barber, task));
 
-        this.useCase.perform(request);
+        this.useCase.handle(request);
 
         verify(appointmentCache).save(eq(request.appointment));
         verify(mailer).send(eq(client.email.toString()), any());

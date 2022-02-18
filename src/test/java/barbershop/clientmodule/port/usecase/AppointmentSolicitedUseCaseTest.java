@@ -41,7 +41,7 @@ public class AppointmentSolicitedUseCaseTest {
 
         var solicitAppointmentRequest = new AppointmentSolicitRequest(client, task, barber, startAt);
 
-        this.useCase.perform(solicitAppointmentRequest);
+        this.useCase.handle(solicitAppointmentRequest);
 
         verify(this.appointmentCache).save(any());
         verify(this.appointmentProducer).requestAppointment(any());
