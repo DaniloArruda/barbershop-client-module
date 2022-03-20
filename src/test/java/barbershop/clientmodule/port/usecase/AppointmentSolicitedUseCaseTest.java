@@ -15,25 +15,25 @@ import barbershop.clientmodule.domain.model.Client;
 import barbershop.clientmodule.domain.model.Task;
 import barbershop.clientmodule.domain.value_object.Email;
 import barbershop.clientmodule.domain.value_object.Name;
-import barbershop.clientmodule.port.cache.AppointmentCache;
+import barbershop.clientmodule.port.repository.AppointmentRepository;
 import barbershop.clientmodule.port.producer.AppointmentProducer;
 import barbershop.clientmodule.port.usecase.request.AppointmentSolicitRequest;
 
 public class AppointmentSolicitedUseCaseTest {
     private final AppointmentSolicitedUseCase useCase;
 
-    private final AppointmentCache appointmentCache;
+    private final AppointmentRepository appointmentRepository;
     private final AppointmentProducer appointmentProducer;
 
     public AppointmentSolicitedUseCaseTest() {
-        this.appointmentCache = Mockito.mock(AppointmentCache.class);
+        this.appointmentRepository = Mockito.mock(AppointmentRepository.class);
         this.appointmentProducer = Mockito.mock(AppointmentProducer.class);
 
-        this.useCase = new AppointmentSolicitedUseCase(appointmentProducer, appointmentCache);
+        this.useCase = new AppointmentSolicitedUseCase(appointmentProducer, appointmentRepository);
     }
 
     @Test
-    public void whenAppointmentIsSolicited_thenThisAppointmentIsSavedOnCacheAndSendToProducer() {
+    public void whenAppointmentIsSolicited_thenThisAppointmentIsSavedOnRepositoryAndSendToProducer() {
         var client = new Client(new Name("Danielle", "Oliveira"), new Email("danilo@email.com"));
         var barber = new Barber(new Name("Danilo", "Arruda"));
         var task = new Task(UUID.randomUUID(), "Moicano", BigDecimal.TEN, 20);
@@ -43,7 +43,7 @@ public class AppointmentSolicitedUseCaseTest {
 
         this.useCase.handle(solicitAppointmentRequest);
 
-        verify(this.appointmentCache).save(any());
+        verify(this.appointmentRepository).save(any());
         verify(this.appointmentProducer).solicitAppointment(any());
     }
 }

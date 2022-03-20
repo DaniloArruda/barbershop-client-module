@@ -11,8 +11,9 @@ public class Appointment {
     public final Barber barber;
     public final Task task;
 
+    // computed properties
     public final LocalDateTime endAt;
-    public final Duration durationInMinutes;
+    public final Duration duration;
 
     public Appointment(LocalDateTime startAt, Client client, Barber barber, Task task) {
         this.id = UUID.randomUUID();
@@ -21,7 +22,19 @@ public class Appointment {
         this.barber = barber;
         this.task = task;
 
-        this.durationInMinutes = this.task.durationInMinutes;
-        this.endAt = this.startAt.plus(this.durationInMinutes);
+        this.duration = task.duration;
+        this.endAt = this.startAt.plus(this.task.duration);
     }
+
+    public Appointment(UUID id, LocalDateTime startAt, Client client, Barber barber, Task task) {
+        this.id = id;
+        this.startAt = startAt;
+        this.client = client;
+        this.barber = barber;
+        this.task = task;
+
+        this.duration = task.duration;
+        this.endAt = this.startAt.plus(this.task.duration);
+    }
+
 }

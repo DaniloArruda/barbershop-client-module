@@ -8,13 +8,13 @@ public class Task {
     public final UUID id;
     public final String description;
     public final BigDecimal price;
-    public final Duration durationInMinutes;
+    public final Duration duration;
 
-    public Task(UUID id, String description, BigDecimal price, Duration durationInMinutes) {
+    public Task(UUID id, String description, BigDecimal price, Duration duration) {
         this.id = id;
         this.description = description;
         this.price = price;
-        this.durationInMinutes = durationInMinutes;
+        this.duration = duration;
     }
 
     public Task(UUID id, String description, BigDecimal price, long durationInMinutes) {

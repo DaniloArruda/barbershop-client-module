@@ -16,22 +16,22 @@ import barbershop.clientmodule.domain.model.Client;
 import barbershop.clientmodule.domain.model.Task;
 import barbershop.clientmodule.domain.value_object.Email;
 import barbershop.clientmodule.domain.value_object.Name;
-import barbershop.clientmodule.port.cache.AppointmentCache;
+import barbershop.clientmodule.port.repository.AppointmentRepository;
 import barbershop.clientmodule.port.usecase.request.AppointmentRejectedRequest;
 
 public class AppointmentRejectedUseCaseTest {
     private final AppointmentRejectedUseCase useCase;
 
-    private final AppointmentCache appointmentCache;
+    private final AppointmentRepository appointmentRepository;
 
     public AppointmentRejectedUseCaseTest() {
-        this.appointmentCache = Mockito.mock(AppointmentCache.class);
+        this.appointmentRepository = Mockito.mock(AppointmentRepository.class);
 
-        this.useCase = new AppointmentRejectedUseCase(this.appointmentCache);
+        this.useCase = new AppointmentRejectedUseCase(this.appointmentRepository);
     }
 
     @Test
-    public void whenAppointmentIsRejected_thenItIsRemovedFromCache() {
+    public void whenAppointmentIsRejected_thenItIsRemovedFromRepository() {
         var client = new Client(new Name("Danielle", "Oliveira"), new Email("danilo@email.com"));
         var barber = new Barber(new Name("Danilo", "Arruda"));
         var task = new Task(UUID.randomUUID(), "Moicano", BigDecimal.TEN, 20);
@@ -40,6 +40,6 @@ public class AppointmentRejectedUseCaseTest {
 
         this.useCase.handle(request);
 
-        verify(appointmentCache).delete(eq(request.appointment.id));
+        verify(appointmentRepository).delete(eq(request.appointment.id));
     }
 }

@@ -1,17 +1,18 @@
 package barbershop.clientmodule.port.usecase;
 
-import barbershop.clientmodule.port.cache.AppointmentCache;
+import barbershop.clientmodule.port.repository.AppointmentRepository;
 import barbershop.clientmodule.port.producer.AppointmentProducer;
 import barbershop.clientmodule.port.usecase.request.AppointmentSolicitRequest;
 
 public class AppointmentSolicitedUseCase implements UseCase<AppointmentSolicitRequest, Void> {
 
     private final AppointmentProducer appointmentProducer;
-    private final AppointmentCache appointmentCache;
+    private final AppointmentRepository appointmentRepository;
 
-    public AppointmentSolicitedUseCase(AppointmentProducer appointmentProducer, AppointmentCache appointmentCache) {
+    public AppointmentSolicitedUseCase(AppointmentProducer appointmentProducer,
+            AppointmentRepository appointmentRepository) {
         this.appointmentProducer = appointmentProducer;
-        this.appointmentCache = appointmentCache;
+        this.appointmentRepository = appointmentRepository;
     }
 
     @Override
@@ -22,7 +23,7 @@ public class AppointmentSolicitedUseCase implements UseCase<AppointmentSolicitRe
                 .startingAt(request.startAt)
                 .build();
 
-        this.appointmentCache.save(appointment);
+        this.appointmentRepository.save(appointment);
 
         this.appointmentProducer.solicitAppointment(appointment);
 

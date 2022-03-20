@@ -1,19 +1,19 @@
 package barbershop.clientmodule.port.usecase;
 
-import barbershop.clientmodule.port.cache.AppointmentCache;
+import barbershop.clientmodule.port.repository.AppointmentRepository;
 import barbershop.clientmodule.port.usecase.request.AppointmentRejectedRequest;
 
 public class AppointmentRejectedUseCase implements UseCase<AppointmentRejectedRequest, Void> {
 
-    private final AppointmentCache appointmentCache;
+    private final AppointmentRepository appointmentRepository;
 
-    public AppointmentRejectedUseCase(AppointmentCache appointmentCache) {
-        this.appointmentCache = appointmentCache;
+    public AppointmentRejectedUseCase(AppointmentRepository appointmentRepository) {
+        this.appointmentRepository = appointmentRepository;
     }
 
     @Override
     public Void handle(AppointmentRejectedRequest request) {
-        this.appointmentCache.delete(request.appointment.id);
+        this.appointmentRepository.delete(request.appointment.id);
 
         return null;
     }
