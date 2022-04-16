@@ -12,4 +12,9 @@ public class Barber {
         this.id = UUID.randomUUID();
         this.name = name;
     }
+
+    public Barber(UUID id, Name name) {
+        this.id = id;
+        this.name = name;
+    }
 }

@@ -5,7 +5,7 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.stereotype.Repository;
 
 import barbershop.clientmodule.adapter.repository.model.AppointmentRecord;
 import barbershop.clientmodule.adapter.repository.model.BarberRecord;
@@ -17,10 +17,11 @@ import barbershop.clientmodule.domain.model.Client;
 import barbershop.clientmodule.domain.model.Task;
 import barbershop.clientmodule.port.repository.AppointmentRepository;
 
+@Repository
 public class AppointmentRepositoryMongo implements AppointmentRepository {
 
     @Autowired
-    private MongoRepository<ClientRecord, String> mongoDb;
+    private MongoManager mongoDb;
 
     @Override
     public void save(Appointment appointment) {

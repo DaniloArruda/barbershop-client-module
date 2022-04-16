@@ -17,7 +17,7 @@ import barbershop.clientmodule.domain.value_object.Email;
 import barbershop.clientmodule.domain.value_object.Name;
 import barbershop.clientmodule.port.repository.AppointmentRepository;
 import barbershop.clientmodule.port.producer.AppointmentProducer;
-import barbershop.clientmodule.port.usecase.request.AppointmentSolicitRequest;
+import barbershop.clientmodule.port.usecase.request.AppointmentSolicitedRequest;
 
 public class AppointmentSolicitedUseCaseTest {
     private final AppointmentSolicitedUseCase useCase;
@@ -39,7 +39,7 @@ public class AppointmentSolicitedUseCaseTest {
         var task = new Task(UUID.randomUUID(), "Moicano", BigDecimal.TEN, 20);
         var startAt = LocalDateTime.now();
 
-        var solicitAppointmentRequest = new AppointmentSolicitRequest(client, task, barber, startAt);
+        var solicitAppointmentRequest = new AppointmentSolicitedRequest(client, task, barber, startAt);
 
         this.useCase.handle(solicitAppointmentRequest);
 

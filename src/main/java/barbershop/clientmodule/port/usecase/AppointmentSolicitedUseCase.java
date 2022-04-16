@@ -1,10 +1,14 @@
 package barbershop.clientmodule.port.usecase;
 
 import barbershop.clientmodule.port.repository.AppointmentRepository;
-import barbershop.clientmodule.port.producer.AppointmentProducer;
-import barbershop.clientmodule.port.usecase.request.AppointmentSolicitRequest;
 
-public class AppointmentSolicitedUseCase implements UseCase<AppointmentSolicitRequest, Void> {
+import org.springframework.stereotype.Component;
+
+import barbershop.clientmodule.port.producer.AppointmentProducer;
+import barbershop.clientmodule.port.usecase.request.AppointmentSolicitedRequest;
+
+@Component
+public class AppointmentSolicitedUseCase implements UseCase<AppointmentSolicitedRequest, Void> {
 
     private final AppointmentProducer appointmentProducer;
     private final AppointmentRepository appointmentRepository;
@@ -16,7 +20,7 @@ public class AppointmentSolicitedUseCase implements UseCase<AppointmentSolicitRe
     }
 
     @Override
-    public Void handle(AppointmentSolicitRequest request) {
+    public Void handle(AppointmentSolicitedRequest request) {
         var appointment = request.client
                 .schedule(request.task)
                 .with(request.barber)
